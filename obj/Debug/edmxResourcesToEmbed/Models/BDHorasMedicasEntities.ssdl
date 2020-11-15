@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BDHorasMedicasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="especialidades">
+    <Key>
+      <PropertyRef Name="idEspecialidad" />
+    </Key>
+    <Property Name="idEspecialidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombreEspecialidad" Type="nvarchar" MaxLength="50" />
+    <Property Name="estadoEspecialidad" Type="bit" />
+  </EntityType>
+  <EntityType Name="horasMedicas">
+    <Key>
+      <PropertyRef Name="idHoraMedica" />
+    </Key>
+    <Property Name="idHoraMedica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idMedico" Type="int" Nullable="false" />
+    <Property Name="idPaciente" Type="int" Nullable="false" />
+    <Property Name="fechaHora" Type="date" Nullable="false" />
+    <Property Name="horaHora" Type="time" Precision="7" Nullable="false" />
+    <Property Name="estadoHora" Type="bit" Nullable="false" />
+    <Property Name="previsionHora" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="medicos">
+    <Key>
+      <PropertyRef Name="idMedico" />
+    </Key>
+    <Property Name="idMedico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rutMedico" Type="nvarchar" MaxLength="50" />
+    <Property Name="nombresMedico" Type="nvarchar" MaxLength="50" />
+    <Property Name="appMedico" Type="nvarchar" MaxLength="50" />
+    <Property Name="apmMedico" Type="nvarchar" MaxLength="50" />
+    <Property Name="telefonoMedico" Type="nvarchar" MaxLength="50" />
+    <Property Name="correoMedico" Type="nvarchar" MaxLength="50" />
+    <Property Name="idEspecialidad" Type="int" />
+    <Property Name="previsionMedico" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="pacientes">
+    <Key>
+      <PropertyRef Name="idPaciente" />
+    </Key>
+    <Property Name="idPaciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rutPaciente" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="nombresPaciente" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="appPaciente" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="apmPaciente" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="telefonoPaciente" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="correoPaciente" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sexoPaciente" Type="bit" Nullable="false" />
+    <Property Name="edadPaciente" Type="int" Nullable="false" />
+    <Property Name="passwordPaciente" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="previciones">
+    <Key>
+      <PropertyRef Name="idPrevicion" />
+    </Key>
+    <Property Name="idPrevicion" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombrePrevicion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="estadoPrevicion" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_horasMedicas_medicos">
+    <End Role="medicos" Type="Self.medicos" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="horasMedicas" Type="Self.horasMedicas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicos">
+        <PropertyRef Name="idMedico" />
+      </Principal>
+      <Dependent Role="horasMedicas">
+        <PropertyRef Name="idMedico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_horasMedicas_pacientes">
+    <End Role="pacientes" Type="Self.pacientes" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="horasMedicas" Type="Self.horasMedicas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pacientes">
+        <PropertyRef Name="idPaciente" />
+      </Principal>
+      <Dependent Role="horasMedicas">
+        <PropertyRef Name="idPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_horasMedicas_previciones">
+    <End Role="previciones" Type="Self.previciones" Multiplicity="1" />
+    <End Role="horasMedicas" Type="Self.horasMedicas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="previciones">
+        <PropertyRef Name="idPrevicion" />
+      </Principal>
+      <Dependent Role="horasMedicas">
+        <PropertyRef Name="previsionHora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_medicos_especialidades">
+    <End Role="especialidades" Type="Self.especialidades" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="medicos" Type="Self.medicos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="especialidades">
+        <PropertyRef Name="idEspecialidad" />
+      </Principal>
+      <Dependent Role="medicos">
+        <PropertyRef Name="idEspecialidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_medicos_previciones">
+    <End Role="previciones" Type="Self.previciones" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="medicos" Type="Self.medicos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="previciones">
+        <PropertyRef Name="idPrevicion" />
+      </Principal>
+      <Dependent Role="medicos">
+        <PropertyRef Name="previsionMedico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BDHorasMedicasModelStoreContainer">
+    <EntitySet Name="especialidades" EntityType="Self.especialidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="horasMedicas" EntityType="Self.horasMedicas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="medicos" EntityType="Self.medicos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pacientes" EntityType="Self.pacientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="previciones" EntityType="Self.previciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_horasMedicas_medicos" Association="Self.FK_horasMedicas_medicos">
+      <End Role="medicos" EntitySet="medicos" />
+      <End Role="horasMedicas" EntitySet="horasMedicas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_horasMedicas_pacientes" Association="Self.FK_horasMedicas_pacientes">
+      <End Role="pacientes" EntitySet="pacientes" />
+      <End Role="horasMedicas" EntitySet="horasMedicas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_horasMedicas_previciones" Association="Self.FK_horasMedicas_previciones">
+      <End Role="previciones" EntitySet="previciones" />
+      <End Role="horasMedicas" EntitySet="horasMedicas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_medicos_especialidades" Association="Self.FK_medicos_especialidades">
+      <End Role="especialidades" EntitySet="especialidades" />
+      <End Role="medicos" EntitySet="medicos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_medicos_previciones" Association="Self.FK_medicos_previciones">
+      <End Role="previciones" EntitySet="previciones" />
+      <End Role="medicos" EntitySet="medicos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

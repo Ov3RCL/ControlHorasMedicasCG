@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e0fbe40ece56419889f46184c2f2bc84" Name="Diagram1">
+        <EntityTypeShape EntityType="BDHorasMedicasModel.especialidades" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDHorasMedicasModel.horasMedicas" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDHorasMedicasModel.medicos" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDHorasMedicasModel.pacientes" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDHorasMedicasModel.previciones" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDHorasMedicasModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="BDHorasMedicasModel.FK_medicos_especialidades" ManuallyRouted="false" />
+        <AssociationConnector Association="BDHorasMedicasModel.FK_horasMedicas_medicos" ManuallyRouted="false" />
+        <AssociationConnector Association="BDHorasMedicasModel.FK_horasMedicas_pacientes" ManuallyRouted="false" />
+        <AssociationConnector Association="BDHorasMedicasModel.FK_horasMedicas_previciones" ManuallyRouted="false" />
+        <AssociationConnector Association="BDHorasMedicasModel.FK_medicos_previciones" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

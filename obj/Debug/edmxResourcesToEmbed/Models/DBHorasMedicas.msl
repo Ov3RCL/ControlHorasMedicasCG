@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BDHorasMedicasModelStoreContainer" CdmEntityContainer="BDHorasMedicasEntities">
+    <EntitySetMapping Name="especialidades">
+      <EntityTypeMapping TypeName="BDHorasMedicasModel.especialidades">
+        <MappingFragment StoreEntitySet="especialidades">
+          <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
+          <ScalarProperty Name="nombreEspecialidad" ColumnName="nombreEspecialidad" />
+          <ScalarProperty Name="estadoEspecialidad" ColumnName="estadoEspecialidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="horasMedicas">
+      <EntityTypeMapping TypeName="BDHorasMedicasModel.horasMedicas">
+        <MappingFragment StoreEntitySet="horasMedicas">
+          <ScalarProperty Name="idHoraMedica" ColumnName="idHoraMedica" />
+          <ScalarProperty Name="idMedico" ColumnName="idMedico" />
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="horaHora" ColumnName="horaHora" />
+          <ScalarProperty Name="estadoHora" ColumnName="estadoHora" />
+          <ScalarProperty Name="previsionHora" ColumnName="previsionHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="medicos">
+      <EntityTypeMapping TypeName="BDHorasMedicasModel.medicos">
+        <MappingFragment StoreEntitySet="medicos">
+          <ScalarProperty Name="idMedico" ColumnName="idMedico" />
+          <ScalarProperty Name="rutMedico" ColumnName="rutMedico" />
+          <ScalarProperty Name="nombresMedico" ColumnName="nombresMedico" />
+          <ScalarProperty Name="appMedico" ColumnName="appMedico" />
+          <ScalarProperty Name="apmMedico" ColumnName="apmMedico" />
+          <ScalarProperty Name="telefonoMedico" ColumnName="telefonoMedico" />
+          <ScalarProperty Name="correoMedico" ColumnName="correoMedico" />
+          <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
+          <ScalarProperty Name="previsionMedico" ColumnName="previsionMedico" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pacientes">
+      <EntityTypeMapping TypeName="BDHorasMedicasModel.pacientes">
+        <MappingFragment StoreEntitySet="pacientes">
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+          <ScalarProperty Name="rutPaciente" ColumnName="rutPaciente" />
+          <ScalarProperty Name="nombresPaciente" ColumnName="nombresPaciente" />
+          <ScalarProperty Name="appPaciente" ColumnName="appPaciente" />
+          <ScalarProperty Name="apmPaciente" ColumnName="apmPaciente" />
+          <ScalarProperty Name="telefonoPaciente" ColumnName="telefonoPaciente" />
+          <ScalarProperty Name="correoPaciente" ColumnName="correoPaciente" />
+          <ScalarProperty Name="sexoPaciente" ColumnName="sexoPaciente" />
+          <ScalarProperty Name="edadPaciente" ColumnName="edadPaciente" />
+          <ScalarProperty Name="passwordPaciente" ColumnName="passwordPaciente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="BDHorasMedicasModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

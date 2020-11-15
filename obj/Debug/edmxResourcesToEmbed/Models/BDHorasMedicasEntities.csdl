@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BDHorasMedicasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="especialidades">
+    <Key>
+      <PropertyRef Name="idEspecialidad" />
+    </Key>
+    <Property Name="idEspecialidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreEspecialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="estadoEspecialidad" Type="Boolean" />
+    <NavigationProperty Name="medicos" Relationship="Self.FK_medicos_especialidades" FromRole="especialidades" ToRole="medicos" />
+  </EntityType>
+  <EntityType Name="horasMedicas">
+    <Key>
+      <PropertyRef Name="idHoraMedica" />
+    </Key>
+    <Property Name="idHoraMedica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idMedico" Type="Int32" Nullable="false" />
+    <Property Name="idPaciente" Type="Int32" Nullable="false" />
+    <Property Name="fechaHora" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="horaHora" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="estadoHora" Type="Boolean" Nullable="false" />
+    <Property Name="previsionHora" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="medicos" Relationship="Self.FK_horasMedicas_medicos" FromRole="horasMedicas" ToRole="medicos" />
+    <NavigationProperty Name="pacientes" Relationship="Self.FK_horasMedicas_pacientes" FromRole="horasMedicas" ToRole="pacientes" />
+    <NavigationProperty Name="previciones" Relationship="Self.FK_horasMedicas_previciones" FromRole="horasMedicas" ToRole="previciones" />
+  </EntityType>
+  <EntityType Name="medicos">
+    <Key>
+      <PropertyRef Name="idMedico" />
+    </Key>
+    <Property Name="idMedico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rutMedico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="nombresMedico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="appMedico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="apmMedico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="telefonoMedico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="correoMedico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="idEspecialidad" Type="Int32" />
+    <Property Name="previsionMedico" Type="Byte" />
+    <NavigationProperty Name="especialidades" Relationship="Self.FK_medicos_especialidades" FromRole="medicos" ToRole="especialidades" />
+    <NavigationProperty Name="horasMedicas" Relationship="Self.FK_horasMedicas_medicos" FromRole="medicos" ToRole="horasMedicas" />
+    <NavigationProperty Name="previciones" Relationship="Self.FK_medicos_previciones" FromRole="medicos" ToRole="previciones" />
+  </EntityType>
+  <EntityType Name="pacientes">
+    <Key>
+      <PropertyRef Name="idPaciente" />
+    </Key>
+    <Property Name="idPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rutPaciente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nombresPaciente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="appPaciente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="apmPaciente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="telefonoPaciente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="correoPaciente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sexoPaciente" Type="Boolean" Nullable="false" />
+    <Property Name="edadPaciente" Type="Int32" Nullable="false" />
+    <Property Name="passwordPaciente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="horasMedicas" Relationship="Self.FK_horasMedicas_pacientes" FromRole="pacientes" ToRole="horasMedicas" />
+  </EntityType>
+  <EntityType Name="previciones">
+    <Key>
+      <PropertyRef Name="idPrevicion" />
+    </Key>
+    <Property Name="idPrevicion" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombrePrevicion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estadoPrevicion" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="horasMedicas" Relationship="Self.FK_horasMedicas_previciones" FromRole="previciones" ToRole="horasMedicas" />
+    <NavigationProperty Name="medicos" Relationship="Self.FK_medicos_previciones" FromRole="previciones" ToRole="medicos" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_medicos_especialidades">
+    <End Role="especialidades" Type="Self.especialidades" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="medicos" Type="Self.medicos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="especialidades">
+        <PropertyRef Name="idEspecialidad" />
+      </Principal>
+      <Dependent Role="medicos">
+        <PropertyRef Name="idEspecialidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_horasMedicas_medicos">
+    <End Role="medicos" Type="Self.medicos" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="horasMedicas" Type="Self.horasMedicas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicos">
+        <PropertyRef Name="idMedico" />
+      </Principal>
+      <Dependent Role="horasMedicas">
+        <PropertyRef Name="idMedico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_horasMedicas_pacientes">
+    <End Role="pacientes" Type="Self.pacientes" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="horasMedicas" Type="Self.horasMedicas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pacientes">
+        <PropertyRef Name="idPaciente" />
+      </Principal>
+      <Dependent Role="horasMedicas">
+        <PropertyRef Name="idPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_horasMedicas_previciones">
+    <End Role="previciones" Type="Self.previciones" Multiplicity="1" />
+    <End Role="horasMedicas" Type="Self.horasMedicas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="previciones">
+        <PropertyRef Name="idPrevicion" />
+      </Principal>
+      <Dependent Role="horasMedicas">
+        <PropertyRef Name="previsionHora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_medicos_previciones">
+    <End Role="previciones" Type="Self.previciones" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="medicos" Type="Self.medicos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="previciones">
+        <PropertyRef Name="idPrevicion" />
+      </Principal>
+      <Dependent Role="medicos">
+        <PropertyRef Name="previsionMedico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BDHorasMedicasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="especialidades" EntityType="Self.especialidades" />
+    <EntitySet Name="horasMedicas" EntityType="Self.horasMedicas" />
+    <EntitySet Name="medicos" EntityType="Self.medicos" />
+    <EntitySet Name="pacientes" EntityType="Self.pacientes" />
+    <EntitySet Name="previciones" EntityType="Self.previciones" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_medicos_especialidades" Association="Self.FK_medicos_especialidades">
+      <End Role="especialidades" EntitySet="especialidades" />
+      <End Role="medicos" EntitySet="medicos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_horasMedicas_medicos" Association="Self.FK_horasMedicas_medicos">
+      <End Role="medicos" EntitySet="medicos" />
+      <End Role="horasMedicas" EntitySet="horasMedicas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_horasMedicas_pacientes" Association="Self.FK_horasMedicas_pacientes">
+      <End Role="pacientes" EntitySet="pacientes" />
+      <End Role="horasMedicas" EntitySet="horasMedicas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_horasMedicas_previciones" Association="Self.FK_horasMedicas_previciones">
+      <End Role="previciones" EntitySet="previciones" />
+      <End Role="horasMedicas" EntitySet="horasMedicas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_medicos_previciones" Association="Self.FK_medicos_previciones">
+      <End Role="previciones" EntitySet="previciones" />
+      <End Role="medicos" EntitySet="medicos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

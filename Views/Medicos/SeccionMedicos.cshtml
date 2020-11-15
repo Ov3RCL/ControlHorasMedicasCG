@@ -1,0 +1,136 @@
+﻿@model IEnumerable<SistemaControlHoras.Models.medicos>
+@{
+    ViewBag.Title = "Médicos";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Gestión Médicos</h1>
+    <button onclick="abrirModalMedico(0)" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalMedicos">
+        <i class="fas fa-plus"></i> Agregar Médico
+    </button>
+
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Rut</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col" style="width:10%;">Apellido Paterno</th>
+                    <th scope="col" style="width:10%;">Apellido Materno</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model)
+                {
+                <tr>
+                    <th scope="row">@Html.DisplayFor(modelItem => i.idMedico)</th>
+                    <td>@Html.DisplayFor(modelItem => i.rutMedico)</td>
+                    <td>@Html.DisplayFor(modelItem => i.nombresMedico)</td>
+                    <td>@Html.DisplayFor(modelItem => i.appMedico)</td>
+                    <td>@Html.DisplayFor(modelItem => i.apmMedico)</td>
+                    <td>@Html.DisplayFor(modelItem => i.telefonoMedico)</td>
+                    <td>@Html.DisplayFor(modelItem => i.correoMedico)</td>
+
+                    <td class="text-center">
+                        <button onclick="abrirModalMedico(@Html.DisplayFor(modelItem => i.idMedico))" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modalMedicos">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="eliminarMedico( @Html.DisplayFor(modelItem => i.idMedico) )">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+                }
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modalMedicos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Médicos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formularioGuardarMedicos">
+                    <input type="hidden" name="idMedico" value="0" id="idMedico" />
+                    <div class="form-row p-2">
+                        <div class="col-lg-4 col-md-12">
+                            <input type="text" class="form-control" placeholder="Rut" required name="rutMedico" id="rutMedico" onblur="validarRutExiste()">
+                        </div>
+                        <div class="col-lg-8 col-md-12">
+                            <input type="text" class="form-control" placeholder="Nombres" required name="nombresMedico" id="nombresMedico">
+                        </div>
+
+                    </div>
+                    <div class="form-row p-2">
+                        <div class="col-lg-6 col-md-12">
+                            <input type="text" class="form-control" placeholder="Apellido Paterno" required name="appMedico" id="appMedico">
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <input type="text" class="form-control" placeholder="Apellido Materno" required name="apmMedico" id="apmMedico">
+                        </div>
+
+                    </div>
+                    <div class="form-row p-2">
+                        <div class="col-lg-4 col-md-12">
+                            <input type="tel" class="form-control" placeholder="Teléfono" required name="telefonoMedico" id="telefonoMedico">
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <input type="email" class="form-control" placeholder="Correo" required name="correoMedico" id="correoMedico">
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="form-check pt-2">
+                                <input class="form-check-input" type="radio" name="sexoMedico" id="sexoMedicoM" value="true" checked>
+                                <label class="form-check-label" for="sexoMedicoM">
+                                    Masculino
+                                </label>
+                                <input class="form-check-input ml-2" type="radio" name="sexoMedico" id="sexoMedicoF" value="false">
+                                <label class="form-check-label ml-4" for="sexoMedicoF">
+                                    Femenino
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row p-2">
+                        <div class="col-lg-6 col-md-12">
+                            <select class="custom-select text-uppercase" name="idEspecialidad" required id="idEspecialidad">
+                                <option value="" selected>Seleccione Especialidad</option>
+
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <select class="custom-select text-uppercase" name="previsionMedico" id="previsionMedico" required>
+                                <option value="" selected>Seleccione Previción</option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="btnGuardarMedico">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

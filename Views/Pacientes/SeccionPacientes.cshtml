@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Pacientes";
+}
+    
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Pacientes</h1>
+    <button onclick="abrirModalPaciente(0)" type="button" class="btn btn-sm btn-primary shadow-lg" data-toggle="modal" data-target="#agregarPaciente">
+        <i class="fas fa-plus"></i> Agregar Paciente
+    </button>
+</div>
+<hr />
+
+<!-- Modal -->
+<div class="modal fade" id="agregarPaciente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloModal">
+                    <i class="fas fa-users"></i> Paciente
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formularioGuardarPaciente">
+                    <input type="hidden" name="idPaciente" id="idPaciente" value="0" />
+                    <div class="form-row">
+                        <div class="col p-2">
+                            <input type="text" required name="rutPaciente" id="rut" class="form-control" placeholder="Rut">
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a username.
+                        </div>
+                        <div class="col p-2">
+                            <input type="text" required name="nombresPaciente" id="nombres" class="form-control" placeholder="Nombres">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col p-2">
+                            <input type="text" required name="appPaciente" id="appPaciente" class="form-control" placeholder="Apellido Paterno">
+                        </div>
+                        <div class="col p-2">
+                            <input type="text" required name="apmPaciente" id="apmPaciente" class="form-control" placeholder="Apellido Materno">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col p-2">
+                            <input type="tel" required name="telefonoPaciente" id="telefono" class="form-control" placeholder="Teléfono">
+                        </div>
+                        <div class="col p-2">
+                            <input type="email" required name="correoPaciente" id="correo" class="form-control" placeholder="Correo">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col p-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="sexoPaciente" id="sexo1" value="true" checked>
+                                <label class="form-check-label" for="sexo1">
+                                    Masculino
+                                </label>
+                                <input class="form-check-input ml-2" type="radio" name="sexoPaciente" id="sexo2" value="false">
+                                <label class="form-check-label ml-4" for="sexo2">
+                                    Femenino
+                                </label>
+                            </div>
+
+
+                        </div>
+                        <div class="col p-2">
+                            <input type="number" required min="1" max="100" name="edadPaciente" id="edad" class="form-control" placeholder="Edad">
+                        </div>
+                        <div class="col p-2">
+                            <input type="text" required class="form-control" name="passwordPaciente" id="passwordPaciente" placeholder="Password" value="123">
+                        </div>
+                    </div>
+
+
+</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
